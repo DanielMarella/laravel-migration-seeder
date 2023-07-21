@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Database\Seeders;
+use Faker\Generator as Faker;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,35 +15,20 @@ class TrainSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $trains = [
-            [
 
-            'azienda' => 'Trenitalia',
-            'stazione_di_partenza' => 'Padova',
-            'stazione_di_arrivo' => 'Venezia',
-            'orario_di_partenza' => '15.00',
-            'orario_di_arrivo' => '16.00',
-            'codice_treno' => 12345,
-            'numero_carrozze' => 20,
-            'in_orario' => true,
-            'cancellato' => false,
-            ],
-
-        ];
-
-        foreach ($trains as $train) {
+        for ($i=0; $i < 100; $i++) { 
             $newTrain = new Train();
-            $newTrain->azienda = $train['azienda'];
-            $newTrain->stazione_di_partenza = $train['stazione_di_partenza'];
-            $newTrain->stazione_di_arrivo = $train['stazione_di_arrivo'];
-            $newTrain->orario_di_partenza = $train['orario_di_partenza'];
-            $newTrain->orario_di_arrivo = $train['orario_di_arrivo'];
-            $newTrain->codice_treno = $train['codice_treno'];
-            $newTrain->numero_carrozze = $train['numero_carrozze'];
-            $newTrain->in_orario = $train['in_orario'];
-            $newTrain->cancellato = $train['cancellato'];
+            $newTrain->azienda = $faker->name();
+            $newTrain->stazione_di_partenza = $faker->city();
+            $newTrain->stazione_di_arrivo = $faker->unique()->city();
+            $newTrain->orario_di_partenza = $faker->time();
+            $newTrain->orario_di_arrivo = $faker->time();
+            $newTrain->codice_treno = $faker->numberBetween(0, 1000);
+            $newTrain->numero_carrozze = $faker->numberBetween(0, 20);
+            $newTrain->in_orario = $faker->boolean();
+            $newTrain->cancellato = $faker->boolean();
             $newTrain->save();
 
 
