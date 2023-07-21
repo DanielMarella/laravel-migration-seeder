@@ -4,8 +4,19 @@
 
 @section('main-content')
 
-<h1>
-    Welcome
-</h1>
+
+<ul>
+    @foreach ($trains as $train)
+        <li>
+            {{$train -> azienda }}
+            {{$train -> stazione_di_partenza }}
+            {{$train -> azienda }}
+            {{$train -> azienda }}
+            {{$train -> azienda }}
+
+
+        </li>
+    @endforeach
+</ul>
 
 @endsection
